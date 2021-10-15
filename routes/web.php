@@ -13,4 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','IndexController@index')->name('index');
+Route::get('/','HomeController@index')->name('index');
+Route::get('/{cat}', 'ProductController@showCategory')->name('showCategory');
+Route::get('/{cat}/{product_id}', 'ProductController@show')->name('showProduct');

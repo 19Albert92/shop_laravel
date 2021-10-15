@@ -89,7 +89,7 @@
                                             adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed
                                             viverra velit venenatis fermentum luctus.
                                         </div>
-                                       <x-button-component/>
+                                        <x-button text="Click me 1"/>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                                             adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed
                                             viverra velit venenatis fermentum luctus.
                                         </div>
-                                        <x-button-component/>
+                                        <x-button text="Click me 2"/>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                                             adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed
                                             viverra velit venenatis fermentum luctus.
                                         </div>
-                                        <x-button-component/>
+                                        <x-button text="Click me 3"/>
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +187,7 @@
                 </div>
             </div>
             <div class="avds_large">
-                <div class="avds_background" style="background-image:url(images/avds_large.jpg)"></div>
+                <div class="avds_background" style="background-image:url({{asset('images/avds_large.jpg')}})"></div>
                 <div class="avds_large_container">
                     <div class="avds_large_content">
                         <div class="avds_title">Professional Cameras</div>
@@ -210,81 +210,33 @@
 
                     <div class="product_grid">
 
+                    @foreach($product as $production)
                         <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="images/product_1.jpg" alt=""></div>
-                            <div class="product_extra product_new"><a href="categories.html">New</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
-                            </div>
-                        </div>
+                            @php
+                                $image = '';
+                                if(count($production->images) > 0) {
+                                    $image = $production->images[0]['img'];
+                                } else {
+                                    $image = 'no_image.jpg';
+                                }
+                            @endphp
+                            <div class="product">
+                                <div class="product_image"><img src="images/{{ $image }}" alt=""></div>
+                                <div class="product_extra product_new"><a href="{{route('showCategory', $production->category['alias'])}}">{{ $production->category['title'] }}</a></div>
+                                <div class="product_content">
+                                    <div class="product_title"><a
+                                            href="{{route('showProduct', ['category', $production->id])}}">{{ $production->title }}</a>
+                                    </div>
+                                    @if($production->new_price != null)
+                                        <div class="product_price text text-danger" style="display: inline-block; margin-right: 10px; font-size: 21px">$ {{ $production->new_price }}</div>
+                                        <div class="product_price" style="text-decoration: line-through; display: inline-block">$ {{ $production->price }}</div>
+                                    @else
+                                        <div class="product_price" >$ {{ $production->price }}</div>
+                                    @endif
 
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="images/product_2.jpg" alt=""></div>
-                            <div class="product_extra product_sale"><a href="categories.html">Sale</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="images/product_3.jpg" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="images/product_4.jpg" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="images/product_5.jpg" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="images/product_6.jpg" alt=""></div>
-                            <div class="product_extra product_hot"><a href="categories.html">Hot</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="images/product_7.jpg" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="images/product_8.jpg" alt=""></div>
-                            <div class="product_extra product_sale"><a href="categories.html">Hot</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
-                            </div>
-                        </div>
+                        @endforeach
 
                     </div>
 
@@ -300,7 +252,8 @@
             <div class="row">
                 <div class="col">
                     <div class="avds_xl_container clearfix">
-                        <div class="avds_xl_background" style="background-image:url(images/avds_xl.jpg)"></div>
+                        <div class="avds_xl_background"
+                             style="background-image:url({{asset('images/avds_xl.jpg')}})"></div>
                         <div class="avds_xl_content">
                             <div class="avds_title">Amazing Devices</div>
                             <div class="avds_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a
@@ -323,7 +276,7 @@
                 <!-- Icon Box -->
                 <div class="col-lg-4 icon_box_col">
                     <div class="icon_box">
-                        <div class="icon_box_image"><img src="images/icon_1.svg" alt=""></div>
+                        <div class="icon_box_image"><img src="{{asset('images/icon_1.svg')}}" alt=""></div>
                         <div class="icon_box_title">Free Shipping Worldwide</div>
                         <div class="icon_box_text">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed
@@ -335,7 +288,7 @@
                 <!-- Icon Box -->
                 <div class="col-lg-4 icon_box_col">
                     <div class="icon_box">
-                        <div class="icon_box_image"><img src="images/icon_2.svg" alt=""></div>
+                        <div class="icon_box_image"><img src="{{asset('images/icon_2.svg')}}" alt=""></div>
                         <div class="icon_box_title">Free Returns</div>
                         <div class="icon_box_text">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed
@@ -347,7 +300,7 @@
                 <!-- Icon Box -->
                 <div class="col-lg-4 icon_box_col">
                     <div class="icon_box">
-                        <div class="icon_box_image"><img src="images/icon_3.svg" alt=""></div>
+                        <div class="icon_box_image"><img src="{{ asset('images/icon_3.svg') }}" alt=""></div>
                         <div class="icon_box_title">24h Fast Support</div>
                         <div class="icon_box_text">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed
@@ -356,33 +309,6 @@
                     </div>
                 </div>
 
-            </div>
-        </div>
-    </div>
-
-    <!-- Newsletter -->
-
-    <div class="newsletter">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="newsletter_border"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="newsletter_content text-center">
-                        <div class="newsletter_title">Subscribe to our newsletter</div>
-                        <div class="newsletter_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                                a ultricies metus. Sed nec molestie eros</p></div>
-                        <div class="newsletter_form_container">
-                            <form action="#" id="newsletter_form" class="newsletter_form">
-                                <input type="email" class="newsletter_input" required="required">
-                                <button class="newsletter_button trans_200"><span>Subscribe</span></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

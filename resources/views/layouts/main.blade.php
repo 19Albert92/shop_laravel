@@ -7,12 +7,13 @@
     <meta name="description" content="Sublime project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{{ asset('styles/bootstrap4/bootstrap.min.css') }}">
-    <link href="{{ asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/OwlCarousel2-2.2.1/animate.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('styles/main_styles.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('styles/responsive.css') }}">
+    <link href="{{ asset('/plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/plugins/OwlCarousel2-2.2.1/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/styles/main_styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/styles/responsive.css') }}">
+
 </head>
 <body>
 
@@ -26,7 +27,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                            <div class="logo"><a href="#">Sublime.</a></div>
+                            <div class="logo"><a href="/">Sublime.</a></div>
                             <nav class="main_nav">
                                 <ul>
                                     <li class="hassubs active">
@@ -42,11 +43,9 @@
                                     <li class="hassubs">
                                         <a href="categories.html">Categories</a>
                                         <ul>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
+                                            @foreach($categories as $category)
+                                            <li><a href="{{ 'showCategory', $category->alias }}">{{ $category->title }}</a></li>
+                                            @endforeach
                                         </ul>
                                     </li>
                                     <li><a href="#">Accessories</a></li>
@@ -127,11 +126,13 @@
 
     @yield('section_content')
 
+@include('layouts.news')
+
     <!-- Footer -->
 
     <div class="footer_overlay"></div>
     <footer class="footer">
-        <div class="footer_background" style="background-image:url(images/footer.jpg)"></div>
+        <div class="footer_background" style="background-image:url({{ asset('images/footer.jpg') }})"></div>
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -168,5 +169,13 @@
 <script src={{asset('"plugins/easing/easing.js"')}}></script>
 <script src="{{asset('plugins/parallax-js-master/parallax.min.js')}}"></script>
 <script src="{{asset('js/custom.js')}}"></script>
+<script src="{{asset('js/product.js')}}"></script
+
+
+
+
+
+
+>
 </body>
 </html>

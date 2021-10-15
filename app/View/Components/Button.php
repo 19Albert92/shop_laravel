@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class ButtonComponent extends Component
+class Button extends Component
 {
 
     /**
@@ -13,10 +13,11 @@ class ButtonComponent extends Component
      * @return void
      */
 
+    public $text;
 
-    public function __construct()
+    public function __construct($text)
     {
-        //
+        $this->text = $text;
     }
 
     /**
@@ -26,6 +27,6 @@ class ButtonComponent extends Component
      */
     public function render()
     {
-        return view('components.button-component');
+        return view('components.button');
     }
 }

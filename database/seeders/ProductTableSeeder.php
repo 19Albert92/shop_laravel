@@ -17,7 +17,7 @@ class ProductTableSeeder extends Seeder
     {
         for ($i = 0; $i <= 10; $i++) {
             DB::table('products')->insert([
-                'title' => 'product '.$i,
+                'title' => 'product ' . $i,
                 'price' => rand(200, 1500),
                 'in_stock' => rand(0, 1),
                 'description' => "Lorem Ipsum is simply dummy text of
@@ -31,6 +31,7 @@ class ProductTableSeeder extends Seeder
                of Letraset sheets containing Lorem Ipsum passages,
                and more recently with desktop publishing software
                like Aldus PageMaker including versions of Lorem Ipsum."
+
             ]);
         }
     }
